@@ -1,0 +1,648 @@
+<?xml version="1.0"?>
+<!-- edited with XMLSpy v2005 sp1 U (http://www.xmlspy.com) by any (Ru-Board) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<!-- Global reference elements -->
+	<xs:simpleType name="LEIType">
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="NameType">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="140"/>
+			<xs:pattern value="[A-ZА-ЯΑ-Ω\s\-]+"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CountryType">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="2"/>
+			<xs:pattern value="[A-Z]{2}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!--  Main element -->
+	<xs:element name="MiFirProject">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="ControlNumber" maxOccurs="unbounded">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:enumeration value="TRUE"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="ReportStatus">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="4"/>
+							<xs:enumeration value="NEWT"/>
+							<xs:enumeration value="CANC"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="TransactionReferenceNumber">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="52"/>
+							<xs:pattern value="^[A-Z0-9]{1,52}$"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="ExecutingEntityIdentificationCode" type="xs:string" fixed="52990037OIEQO0EVFH64"/>
+				<xs:element name="InvestmentFirm">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:enumeration value="TRUE"/>
+							<xs:enumeration value="FALSE"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="BuyerIdentificationCode">
+					<xs:simpleType>
+						<xs:restriction base="LEIType">
+							<xs:minLength value="4"/>
+							<xs:maxLength value="35"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="CountryOfTheBranchForTheBuyer" type="CountryType" minOccurs="0"/>
+				<xs:element name="BuyerFirstName" nillable="true" minOccurs="0">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:pattern value="[A-ZÀ-žA-ЯA-Ω\s\-\, \' \–]+"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="BuyerSurname" nillable="true" minOccurs="0">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:pattern value="[A-ZÀ-žA-ЯA-Ω\s\-\, \' \–]+"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="BuyerDateOfBirth" nillable="true">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:pattern value="^([0-9]{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01]))$"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="BuyerDecisionMakerCode">
+					<xs:simpleType>
+						<xs:restriction base="LEIType">
+							<xs:minLength value="20"/>
+							<xs:maxLength value="35"/>
+							<xs:pattern value="^[A-Z0-9]{18}[0-9]{2}$"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="BuyDecisionMakerFirstName" nillable="true" minOccurs="0">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:pattern value="[A-ZÀ-žA-ЯA-Ω\s\-\, \' \–]+"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="BuyDecisionMakerSurname" nillable="true" minOccurs="0">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:pattern value="[A-ZÀ-žA-ЯA-Ω\s\-\, \' \–]+"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="BuyDecisionMakerDateOfBirth" nillable="true">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:pattern value="^([0-9]{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01]))$"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="SellerIdentificationCode">
+					<xs:simpleType>
+						<xs:restriction base="LEIType">
+							<xs:minLength value="4"/>
+							<xs:maxLength value="35"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="CountryOfTheBranchForTheSeller" type="CountryType"/>
+				<xs:element name="SellerFirstName" type="NameType" minOccurs="0"/>
+				<xs:element name="SellerSurname" type="NameType" minOccurs="0"/>
+				<xs:element name="SellerDateOfBirth" nillable="true">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:pattern value="^([0-9]{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01]))$"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="SellerDecisionMakerCode" type="LEIType"/>
+				<xs:element name="SellDecisionMakerFirstName" nillable="true" minOccurs="0">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:pattern value="[A-ZÀ-žA-ЯA-Ω\s\-\, \' \–]+"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="SellDecisionMakerSurname" nillable="true" minOccurs="0">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:pattern value="[A-ZÀ-žA-ЯA-Ω\s\-\, \' \–]+"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="SellDecisionMakerDateOfBirth" nillable="true">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:pattern value="^([0-9]{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01]))$"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="TransmissionOfOrderIndicator" type="xs:boolean"/>
+				<xs:element name="TradingDateTime" type="xs:dateTime"/>
+				<xs:element name="TradingCapacity">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="4"/>
+							<xs:enumeration value="DEAL"/>
+							<xs:enumeration value="MTCH"/>
+							<xs:enumeration value="AOTC"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="Quantity">
+					<xs:simpleType>
+						<xs:restriction base="xs:decimal">
+							<xs:minInclusive value="1"/>
+							<xs:pattern value="^\d{1,18}(\.\d{1,5})?$"/>
+							<xs:pattern value="^\d{1,18}(\.\d{1,17})?$"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="QuantityCurrency">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:length value="3"/>
+							<xs:pattern value="^(?!XAG|XAU|XBA|XBB|XBC|XBD|XDR|XEU|XFU|XPD|XPT|XXX)[A-Z]{3}$"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="Price">
+					<xs:simpleType>
+						<xs:restriction base="xs:decimal">
+							<xs:pattern value="^\d{1,5}(\.\d{1,13})?$"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="PriceCurrency">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:length value="3"/>
+							<xs:pattern value="^(?!XAG|XAU|XBA|XBB|XBC|XBD|XDR|XEU|XFU|XPD|XPT|XXX)[A-Z]{3}$"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="Venue" nillable="false">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="4"/>
+							<xs:pattern value="[A-Z0-9]{4}"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="InstrumentIdentificationCode">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="12"/>
+							<xs:pattern value="^[a-zA-Z0-9]{1,12}$"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="InvestmentDecisionWithinFirm">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="50"/>
+							<xs:pattern value="[A-Z0-9]{1,50}"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="CountryOfTheBranchSuperVisingThePersonResponsibleForTheInvestmentDecision">
+					<xs:simpleType>
+						<xs:restriction base="CountryType">
+							<xs:length value="2"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="ExecutionWithinFirm">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="50"/>
+							<xs:pattern value="[A-Z0-9]{1,50}"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="SecuritiesFinancingTransactionIndicator">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:enumeration value="TRUE"/>
+							<xs:enumeration value="FALSE"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="TradingVenueTransactionIdentificationCode" nillable="true" minOccurs="0">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:length value="0"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="TransmittingFirmIdentificationCodeForTheBuyer" nillable="true">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:length value="0"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="TransmittingFirmIdentificationCodeForTheSeller" nillable="true">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:length value="0"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="DerivativeNotionalIncreaseDecrease" nillable="true">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:length value="0"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="NetAmount" nillable="true">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:length value="0"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="CountryOfTheBranchMembership" nillable="true">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:length value="0"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="Up-frontPayment" nillable="true">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:length value="0"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="Up-frontPaymentCurrency" nillable="true">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:length value="0"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="ComplexTradeComponentId" nillable="true">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:length value="0"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="InstrumentFullName" nillable="true">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:length value="0"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="InstrumentClassification" nillable="true">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:length value="0"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="NotionalCurrency1" nillable="true">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:length value="0"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="NotionalCurrency2" nillable="true">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:length value="0"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="PriceMultiplier" nillable="true">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:length value="0"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="UnderlyingInstrumentCode" nillable="true">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:length value="0"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="UnderlyingIndexName" nillable="true" minOccurs="0">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:length value="0"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="TermOfTheUnderlyingIndex" nillable="true" minOccurs="0">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:length value="0"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="OptionType" nillable="true" minOccurs="0">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:length value="0"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="StrikePrice" nillable="true" minOccurs="0">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:length value="0"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="StrikePriceCurrency" nillable="true" minOccurs="0">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:length value="0"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="OptionExerciseStyle" nillable="true" minOccurs="0">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:length value="0"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="MaturityDate" nillable="true">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:length value="0"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="ExpiryDate" nillable="true">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:length value="0"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="DeliveryType" nillable="true">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:length value="0"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="CountryOfTheBranchSupervisingThePersonResponsibleForTheExecution" nillable="true">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:length value="0"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="WaiverIndicator" nillable="true">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:length value="0"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="ShortSellingIndicator" nillable="true">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:length value="0"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="OTCPost-TradeIndicator" nillable="true">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:length value="0"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="CommodityDerivativeIndicator" nillable="true">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:length value="0"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="SubmittingEntityIdentificationCode" type="xs:string" fixed="213800RZGGQK6688SB45"/>
+				<xs:element name="BuyerIDType">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:length value="1"/>
+							<xs:pattern value="^([L]{1}(;[L]){0,2}|[N]{1}(;[N]){0,2}|[M]{1}(;[M]){0,2}|[I]{1}(;[I]){0,2}|[T]{1}(;[T]){0,2})$"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="BuyerIDSubType">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="35"/>
+							<xs:pattern value="^[A-Z0-9]{35}$"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="BuyerDecisionMakerIDType">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:length value="1"/>
+							<xs:pattern value="^([L]{1}(;[L]){0,2}|[N]{1}(;[N]){0,2}|[T]{1}(;[T]){0,2})$"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="BuyerDecisionMakerIDSubType">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:length value="6"/>
+							<xs:pattern value="^[A-Z]{6}$"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="SellerIDType">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:length value="1"/>
+							<xs:pattern value="^([L]{1}(;[L]){0,2}|[N]{1}(;[N]){0,2}|[M]{1}(;[M]){0,2}|[I]{1}(;[I]){0,2}|[T]{1}(;[T]){0,2})$"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="SellerIDSubType">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="35"/>
+							<xs:pattern value="^[A-Z0-9]{35}$"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="SellerDecisionMakerIDType">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:length value="1"/>
+							<xs:pattern value="^([L]{1}(;[L]){0,2}|[N]{1}(;[N]){0,2}|[T]{1}(;[T]){0,2})$"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="SellerDecisionMakerIDSubType">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:length value="6"/>
+							<xs:pattern value="^[A-Z]{6}$"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="QuantityType">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="13"/>
+							<xs:enumeration value="Unit"/>
+							<xs:enumeration value="NominalValue"/>
+							<xs:enumeration value="MonetaryValue"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="PriceType">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="12"/>
+							<xs:enumeration value="Pctg"/>
+							<xs:enumeration value="Yld"/>
+							<xs:enumeration value="BsisPts"/>
+							<xs:enumeration value="PNDG"/>
+							<xs:enumeration value="NOAP"/>
+							<xs:enumeration value="MntryValAmt"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="InstrumentIDType">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:enumeration value="FinInstrm.Id"/>
+							<xs:enumeration value="FinInstrm.Othr"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="NotionalCurrency2Type" minOccurs="0">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:enumeration value="Intrst"/>
+							<xs:enumeration value="FX"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="UVInstrumentClassification" minOccurs="0">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:enumeration value="SwaplnSingle"/>
+							<xs:enumeration value="SwaplnBasket"/>
+							<xs:enumeration value="SwapOutSingle"/>
+							<xs:enumeration value="SwapOutBasket"/>
+							<xs:enumeration value="OtherSingle"/>
+							<xs:enumeration value="OtherBasket"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="UVIndexClassification" minOccurs="0">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:enumeration value="SwaplnSingleIndex"/>
+							<xs:enumeration value="SwaplnBasketIndex"/>
+							<xs:enumeration value="SwapOutSingleIndex"/>
+							<xs:enumeration value="SwapOutBasketIndex"/>
+							<xs:enumeration value="OtherSingleIndex"/>
+							<xs:enumeration value="OtherBasketIndex"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="UnderlyingIndexID" minOccurs="0">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:length value="12"/>
+							<xs:pattern value="^[A-Z0-9]{12}$"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="StrikePriceType" minOccurs="0">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:length value="12"/>
+							<xs:enumeration value="Pctg"/>
+							<xs:enumeration value="Yld"/>
+							<xs:enumeration value="BsisPts"/>
+							<xs:enumeration value="PNDG"/>
+							<xs:enumeration value="MntryValAmt"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="InvestmentDecisionIDType">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:length value="1"/>
+							<xs:pattern value="^([N]{1}(;[N]){0,2}|[A]{1}(;[A]){0,2}|[T]{1}(;[T]){0,2})$"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="InvestmentDecisionIDSubType">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:length value="6"/>
+							<xs:pattern value="^[A-Z]{6}$"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="FirmExecutionIDType">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:length value="1"/>
+							<xs:pattern value="^^([N]{1}(;[N]){0,2}|[A]{1}(;[A]){0,2}|[C]{1}(;[C]){0,2}|[T]{1}(;[T]){0,2})$"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="FirmExecutionIDSubType">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:length value="6"/>
+							<xs:pattern value="^[A-Z]{6}$"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="DataCategory">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="50"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="InternalClientIdentification" minOccurs="0">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="250"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
